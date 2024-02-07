@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            margin: 20px 0 0; /* Adjusted margin */
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            min-height: 100vh; /* Ensure full viewport height */
+            background-color: #2596be; /* Background color */
+            color: white;
+            font-family: Calligraffitti, cursive; /* Change the font */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .puppy-gif {
+            width: 300px;
+            height: 300px;
+            background-image: url('https://www.icegif.com/wp-content/uploads/running-icegif-20.gif'); /* Cute cartoon puppy image from the provided link */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 20px auto; /* Adjusted margin */
+        }
+
+        .options {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Smooth transition */
+        }
+
+        #yes-btn {
+            background-color: #77dd77; /* Pastel green */
+            border: none;
+            color: white;
+            width: 150px; /* Initial width */
+        }
+
+        #yes-btn:hover {
+            background-color: #66bb66; /* Darker green on hover */
+        }
+
+        #blah-btn {
+            background-color: #ffb6c1; /* Pastel red */
+            border: none;
+            color: white;
+            width: 120px; /* Initial width */
+            opacity: 1; /* Initial opacity */
+        }
+
+        #blah-btn:hover {
+            background-color: #ff99b3; /* Darker pink on hover */
+        }
+
+        h2 {
+            margin-top: 0; /* Remove default margin */
+            opacity: 0; /* Initially hide the text */
+            animation: fadeInUp 1s forwards; /* Fade-in animation */
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Start position */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* End position */
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="question">Will you be my Valentine?</h2>
+        <div class="puppy-gif"></div>
+        <div class="options">
+            <button id="yes-btn">Yes</button>
+            <button id="blah-btn">Blah!</button>
+        </div>
+        <div class="response"></div>
+    </div>
+
+    <script>
+        var responses = [
+            "Will u be my Valentine?? 👀",
+            "Are you sure? 🤔",
+            "THINK AGAIN! 😒",
+            "COME ON! 😑",
+            "DIDN'T U GET THE QUESTION? 🤨",
+            "WILL YOU BE MY VALENTINE? 😍",
+            "YAAAA!!!! 😃",
+            "chill itna load nhi lete 🤬",
+            "🥺really ?",
+            "yaa!! i'll kill u 🔪",
+            "mae kaha kuch bolti hu 👀",
+            "but for real ....now also u'll say blah? 😒",
+            "it's okay let's do it again.....otherwise john cena mae kar dungi 😤",
+            "will u be my Valentine?? .....DON'T U DARE TOUCH THT BLAH!! AGAIN 😑",
+            "touch YES😑",
+            "touch YES😒",
+            "touch YES😑🔪",
+            "touch YES😤",
+            "touch YES🤬",
+            "IT'S THERE ON UR LEFT...TAP YES🤬",
+            "COME ON WHT'S SOO HARD....GO TO UR LEFT FOR THE RIGHT CHOICE😤",
+            "YES?😑",
+            "YAA ARE U BLIND?.....IT'S JUST OVER HERE...MORE VISIBLE THEN UR BLAH!😤",
+            "it's oky calm down.....*don't kill him",
+            "so once again Sir"
+        ];
+
+        var responseIndex = 0;
+        var responseElement = document.querySelector('.response');
+        var questionElement = document.getElementById('question');
+        var loop = false;
+        var increaseSize = 0;
+
+        document.getElementById('yes-btn').addEventListener('click', function() {
+            questionElement.classList.remove('fade-in');
+            questionElement.innerHTML = "Well, Hiii my Valentine 🥰🐶🥺<br>No but now i say BLAHHH!!! BYE😤";
+            questionElement.classList.add('fade-in'); // Fade in response
+        });
+
+        document.getElementById('blah-btn').addEventListener('click', function() {
+            questionElement.innerHTML = responses[responseIndex];
+            responseIndex = (responseIndex + 1) % responses.length;
+
+            if (responseIndex === 21) {
+                loop = true;
+            }
+
+            if (loop) {
+                responseIndex = responseIndex % 21; // Loop through the first 21 responses
+            }
+
+            var blahButton = document.getElementById('blah-btn');
+            var currentWidth = parseFloat(window.getComputedStyle(blahButton).getPropertyValue('width'));
+            var newWidth = currentWidth * 0.9; // Decrease size
+            blahButton.style.width = newWidth + 'px';
+            blahButton.style.opacity = Math.max(0, parseFloat(window.getComputedStyle(blahButton).getPropertyValue('opacity')) - 0.05); // Slowly fade out
+
+            increaseSize += 10; // Incrementally increase size
+            document.getElementById('yes-btn').style.width = (150 + increaseSize) + 'px'; // Increase button size
+        });
+    </script>
+</body>
+</html>
